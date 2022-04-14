@@ -31,11 +31,10 @@ func Run(args ...string) (combinedOutput string, err error) {
 // Extra args can be provided via r.ExtraArgs
 func Get(r GetRequest) (result string, err error) {
 	if r.Kind == "" {
-		err = errors.New("Must specify Kind filed")
+		err = errors.New("Must specify Kind field")
 		return
 	}
-	args := []string{r.Kind}
-
+	args := []string{"get", r.Kind}
 	handleCommonArgs(args, r.BaseRequest)
 
 	output := "json"
@@ -49,7 +48,7 @@ func Get(r GetRequest) (result string, err error) {
 	}
 	if len(r.FieldSelectors) > 0 {
 		fieldSelectors := strings.Join(r.FieldSelectors, ",")
-		args = append(args, "--field-selector", "'" + fieldSelectors + "'")
+		args = append(args, "--field-selector", "'"+fieldSelectors+"'")
 	}
 
 	return Run(args...)
@@ -64,12 +63,12 @@ func Get(r GetRequest) (result string, err error) {
 // container to run the command in
 func Exec(r ExecRequest) (result string, err error) {
 	if r.Command == "" {
-		err = errors.New("Must specify Command filed")
+		err = errors.New("Must specify Command field")
 		return
 	}
 
 	if r.Target == "" {
-		err = errors.New("Must specify Target filed")
+		err = errors.New("Must specify Target field")
 		return
 	}
 
