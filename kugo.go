@@ -35,7 +35,7 @@ func Get(r GetRequest) (result string, err error) {
 		return
 	}
 	args := []string{"get", r.Kind}
-	handleCommonArgs(args, r.BaseRequest)
+	args = handleCommonArgs(args, r.BaseRequest)
 
 	output := "json"
 	if r.Output != "" {
@@ -77,14 +77,13 @@ func Exec(r ExecRequest) (result string, err error) {
 		args = append(args, "-c", r.Container)
 	}
 
-	handleCommonArgs(args, r.BaseRequest)
-
+	args = handleCommonArgs(args, r.BaseRequest)
 	args = append(args, "--", r.Command)
 
 	return Run(args...)
 }
 
-func handleCommonArgs(args []string, r BaseRequest) {
+func handleCommonArgs(args []string, r BaseRequest) []string {
 	if r.KubeConfigFile != "" {
 		args = append(args, "--kubeconfig", r.KubeConfigFile)
 	}
@@ -99,5 +98,5 @@ func handleCommonArgs(args []string, r BaseRequest) {
 	if len(r.ExtraArgs) > 0 {
 		args = append(args, r.ExtraArgs...)
 	}
-	return
+	return args
 }
