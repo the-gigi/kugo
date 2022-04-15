@@ -85,6 +85,9 @@ func Exec(r ExecRequest) (result string, err error) {
 }
 
 func handleCommonArgs(args []string, r BaseRequest) {
+	if r.KubeConfigFile != "" {
+		args = append(args, "--kubeconfig", r.KubeConfigFile)
+	}
 	if r.KubeContext != "" {
 		args = append(args, "--context", r.KubeContext)
 	}
@@ -93,7 +96,6 @@ func handleCommonArgs(args []string, r BaseRequest) {
 	} else {
 		args = append(args, "-A")
 	}
-
 	if len(r.ExtraArgs) > 0 {
 		args = append(args, r.ExtraArgs...)
 	}

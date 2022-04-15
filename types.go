@@ -1,24 +1,25 @@
 package kugo
 
 type BaseRequest struct {
-	KubeContext string
-	Namespace string
-	ExtraArgs []string
+	KubeConfigFile string
+	KubeContext    string
+	Namespace      string
+	ExtraArgs      []string
 }
 
 type GetRequest struct {
 	BaseRequest
 
-	Kind string
+	Kind           string
 	FieldSelectors []string
-	Label string
-	Output string
+	Label          string
+	Output         string
 }
 
 type ExecRequest struct {
 	BaseRequest
 
-	Command string
-	Target string
+	Command   string
+	Target    string
 	Container string
 }
