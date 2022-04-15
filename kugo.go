@@ -27,7 +27,7 @@ func Run(args ...string) (combinedOutput string, err error) {
 // Get gets resources of a specific kind
 //
 // If a namespace is not provided it gets resources in all namespaces
-// If output is not provided the efault is json (unlike kubectl's yaml)
+// If output is not provided the default is json (unlike kubectl's yaml)
 // Extra args can be provided via r.ExtraArgs
 func Get(r GetRequest) (result string, err error) {
 	if r.Kind == "" {
