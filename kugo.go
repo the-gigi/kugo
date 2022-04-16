@@ -21,6 +21,9 @@ func Run(args ...string) (combinedOutput string, err error) {
 
 	bytes, err := exec.Command("kubectl", args...).CombinedOutput()
 	combinedOutput = string(bytes)
+	if err != nil {
+		err = errors.Wrap(err, combinedOutput)
+	}
 	return
 }
 
