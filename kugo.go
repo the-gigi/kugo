@@ -16,7 +16,7 @@ func Run(args ...string) (combinedOutput string, err error) {
 	}
 
 	if len(args) == 1 {
-		args = strings.Split(args[0], " ")
+		args = strings.Fields(args[0])
 	}
 
 	bytes, err := exec.Command("kubectl", args...).CombinedOutput()
